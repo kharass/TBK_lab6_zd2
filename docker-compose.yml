@@ -1,0 +1,22 @@
+version: "3"
+services:
+  server:
+    build: server/
+    command: python ./server.py
+    ports:
+      - "3000:3000"
+    networks:
+      - my-network
+  client:
+    build: client/
+    command: python ./client.py
+    ports:
+      - "9000:9000"
+    networks:
+      - my-network
+    depends_on:
+      - server
+
+networks:
+  my-network:
+    driver: bridge
